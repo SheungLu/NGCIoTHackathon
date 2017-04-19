@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Smoothie Chart Example</title>
+    <script type="text/javascript" src="smoothie.js"></script>
+	<script type="text/javascript" src="test_read.js"></script>
+  </head>
+  <body>
+
+    <h1>Smoothie Example</h1>
+
+    <canvas id="mycanvas" width="700" height="300"></canvas>
+
+	<script type="text/javascript">
+
+		if (window.File && window.FileReader && window.FileList && window.Blob) {
+			// Great success! All the File APIs are supported.
+			//alert('FileRead works.');
+		} else {
+			//alert('The File APIs are not fully supported in this browser.');
+		}
+		var X = 'asd';
+		var binStr = '0121'
+		readData(	function (binStr) {
+						console.log("A: " + binStr);
+						this.X = binStr;
+					}
+		);
+		
+		//var X = readData();
+		console.log("B: " + X);
+		console.log("BB: " + binStr);
+		var filepath = 'fdsafsdfsd';
+		ifHasChanged("yourpage.html", function (nModif, nVisit) {
+		console.log("The page '" + this.filepath + "' has been changed on " + (new Date(nModif)).toLocaleString() + "!");
+		//console.log("The Data: " + theData);
+		//alert('The Data: ' + theData);
+		
+		});
+	
+		// Random data
+		var line1 = new TimeSeries();
+		var line2 = new TimeSeries();
+		var fname = 100;
+		//var X = 0;
+		setInterval(function() {
+		if (fname == 100) {
+			fname = 101;
+		}
+		else {
+			fname = 100;
+		}
+		readData('sensor_data/temperature/tempData.csv', function (binStr) {
+			//console.log("C: " + binStr);
+			X = Number(binStr);
+			//console.log("D: " + X);
+			line1.append(new Date().getTime(), Math.random());
+			line2.append(new Date().getTime(), X);
+
+		});
+		//X = Number(binStr);
+		//console.log("D: " + X);
+
+		}, 1000);
+
+		var smoothie = new SmoothieChart({interpolation:'linear',grid:{fillStyle:'#ffffff',sharpLines:true,verticalSections:8},labels:{fillStyle:'#000000',fontSize:12},maxValue:255,minValue:0,timestampFormatter:SmoothieChart.timeFormatter});
+		/*,horizontalLines:[{color:'#333333',lineWidth:1,value:0},{color:'#333333',lineWidth:1,value:63.75},{color:'#333333',lineWidth:1,value:191.25}]*/
+		smoothie.addTimeSeries(line1, {lineWidth:2,strokeStyle:'#000000'});
+		smoothie.addTimeSeries(line2, {lineWidth:2,strokeStyle:'#FF0000'});
+
+		smoothie.streamTo(document.getElementById("mycanvas"), 1000);
+    </script>
+
+    <p><a href="tutorial.html">Return to tutorial</a></p>
+  
+  </body>
+</html>

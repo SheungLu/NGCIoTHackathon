@@ -1,0 +1,27 @@
+<html>
+<head>
+<script type="text/javascript"
+  src="dygraph/dygraph.js"></script>
+<link rel="stylesheet" src="dygraph/dygraph.css" />
+</head>
+<body>
+<div id="graphdiv2"
+  style="width:500px; height:300px;"></div>
+<script type="text/javascript">
+$(document).ready(function () {
+  g2 = new Dygraph(
+    document.getElementById("graphdiv2"),
+    "sensor_data/temperatures.csv", // path to CSV file
+    {}          // options
+  );
+  }
+  window.intervalId = setInterval(function() {
+        var x = new Date();  // current time
+        var y = Math.random();
+        data.push([x, y]);
+        g.updateOptions( { 'file': data } );
+      }, 1000);
+ );
+</script>
+</body>
+</html>

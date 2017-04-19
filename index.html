@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>NGC IOT Hackathon: Ember Vigil</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+	<!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+
+    <!-- Custom CSS -->
+    <link href="css/one-page-wonder.css" rel="stylesheet">
+	
+	<!-- Import plotting scripts-->
+    <script type="text/javascript" src="smoothie.js"></script>
+	<script type="text/javascript" src="test_read.js"></script>
+    
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+                    <li>
+                        <a href="#about">About</a>
+                    </li>
+                    <li>
+                        <a href="#view_data">View Data</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Full Width Image Header -->
+    <header class="header-image">
+		
+		<div class="headline">
+            <div class="container">
+                <h1>Ember Vigil</h1>
+                <h2 style="font-family:Consolas">NGC IoT Hackathon</h2>
+            </div>
+        </div>
+		
+    </header>
+	<div class="container">
+		<table style="width:100%">
+		  <tr>
+			<td><img class="logos-image" src="images/umd_logo.png"  align="middle"></td>
+		  </tr>
+		  <tr>
+			<td>&nbsp </td>
+		  </tr>
+		  <tr>
+			<td><img class="logos-image" src="images/ngc_logo.png"  align="middle"></td> 
+		  </tr>
+		</table>
+	</div>
+    <!-- Page Content -->
+	
+    <div class="container">
+
+        <hr class="featurette-divider" id="view_data">
+		<!-- Data -->
+		<table>
+			<tr>
+				<th><h3 class="lead">Temperature:</h3><div class="plot_area"><canvas id="mycanvas" width="400" height="300"></canvas></div></th>
+				<th><h3 class="lead">Ultrasonic:</h3><div class="plot_area"><canvas id="mycanvas2" width="400" height="300"></canvas></div></th>
+			</tr>
+			<tr>
+				<th><h3 class="lead">Gas:</h3><div class="plot_area"><canvas id="mycanvas3" width="400" height="300"></canvas></div></th>
+				<th><h3 class="lead">Flame:</h3><div class="plot_area"><canvas id="mycanvas4" width="400" height="300"></canvas></div></th>
+			</tr>
+		</table>
+		<!-- Data 
+		<div class="plot_area" id="view_data">
+			<canvas id="mycanvas" width="700" height="300"></canvas>
+		</div>
+		<div class="plot_area" id="view_data2">
+			<canvas id="mycanvas2" width="700" height="300"></canvas>
+		</div>
+		<hr class="featurette-divider">
+		-->
+        <!-- Info -->
+		<!--<div class="plot_area"><canvas id="fireImageCanvas" width="400" height="300"></canvas></div>
+		--->
+		<div>
+			<h3 class="lead">Captured Image:</h3>
+			<img id="fireImage" src="images/webcam.jpg">
+		</div>
+		<!-- <input type=button onClick=reload(); value='Reload image'>
+		--->
+		<hr class="featurette-divider" id="about">
+        <div class="featurette">
+            
+            <h2 class="featurette-heading">Project Description:</h2>
+			<p class="lead">
+				This project involves developing an autonomous fire truck that will patrol a predefined area, looking for signs of open flames. Several sensors are used for flame detection, including the flame, temperature, and gas sensors. An ultrasonic sensor is used to help in obstacle avoidance. A USB camera is also attached that will take a picture of a detected flame.
+
+				All sensor data are uploaded to a cloud computing platform (Amazon AWS –S3) through WiFi, and this data can be viewed in real-time through a publicly accessible web page.
+
+				The whole Raspberry Pi platform and sensors are mounted on an RC car.
+
+			</p>
+			<h2 class="featurette-heading">Details:
+            </h2>
+            <p class="lead">
+				<ul>
+					<li>The <b>flame</b>, <b>gas</b>, and <b>temperature</b> sensor modules have circuitry on board that provide analog signals corresponding to their respective signals. These analog ouputs are sampled by the PCF8591 ADC module</li>
+					<li><b>Ultrasonic</b> sensor readings are initiated by a digital trigger sent by the Raspberry Pi. This causes the sensor to emit a 40 kHz signal. If the signal is reflected back, the sensor outputs a digital pulse whose pulse width corresponds to the echo time. This pulse is read by the Raspberry Pi and converted into a detected range</li>
+					<li>The <b>RC car</b> is driven by two motors, one for steering and one for driving. The Raspberry Pi controls the motor inputs through a motor controller which steps up the Pi’s 3.3 V outputs to the required 9 V</li>
+				</ul>
+			</p>
+			<h2 class="featurette-heading">Sensors Used:
+            </h2>
+            <p class="lead">
+				<ul>
+					<li>Flame Sensor</li>
+					<li>Ultrasonic Sensor</li>
+					<li>Gas Sensor</li>
+					<li>PCF8591 ADC</li>
+				</ul>
+			</p>
+			
+			<h2 class="featurette-heading">Additional Components:
+            </h2>
+            <p class="lead">
+				<ul>
+					<li>RC Car - $21.30</li>
+					<li>LB1948MC Motor Driver - $1.97</li>
+					<li>TSSOP-16 Breakout Board - $1.32</li>
+					<li>USB Webcam - $27.09</li>
+					<li>Battery pack - $24.99</li>
+					<li>Amazon Web Services (AWS) - <$0.10</li>
+						<ul>
+						<li>Simple Storage Service (S3)</li>
+						<li>IoT Platform</li>
+						<img class="featurette-image img-responsive pull-left" src="images/s3-logo.png">
+						<img class="featurette-image img-responsive pull-left" src="images/aws-iot_sm.jpg">
+					</ul>
+				</ul>
+			</p>
+        </div>
+		<hr class="featurette-divider">
+		<div class="featurette">
+			<h2 class="featurette-heading">Team Members:
+			<p class="lead">
+				<img class="featurette-image img-circle img-responsive pull-left" src="http://www.placehold.it/200">
+				<img class="featurette-image img-circle img-responsive pull-left" src="http://www.placehold.it/200">
+			</p>
+		</div>
+        <hr class="featurette-divider">
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <!-- /.container -->
+	
+	<script type="text/javascript">
+
+		if (window.File && window.FileReader && window.FileList && window.Blob) {
+			// Great success! All the File APIs are supported.
+			//alert('FileRead works.');
+		} else {
+			//alert('The File APIs are not fully supported in this browser.');
+		}
+		var X = 'asd';
+		var binStr = '0121'
+		/*
+		readData(	function (binStr) {
+						console.log("A: " + binStr);
+						this.X = binStr;
+					}
+		);
+		*/
+		//var X = readData();
+		console.log("B: " + X);
+		console.log("BB: " + binStr);
+		var filepath = 'fdsafsdfsd';
+		ifHasChanged("yourpage.html", function (nModif, nVisit) {
+		console.log("The page '" + this.filepath + "' has been changed on " + (new Date(nModif)).toLocaleString() + "!");
+		//console.log("The Data: " + theData);
+		//alert('The Data: ' + theData);
+		
+		});
+	
+		// Random data
+		var line1 = new TimeSeries();
+		var line2 = new TimeSeries();
+		var line3 = new TimeSeries();
+		var line4 = new TimeSeries();
+		var fname = 100;
+		//var X = 0;
+		setInterval(function() {
+			if (fname == 100) {
+				fname = 101;
+			}
+			else {
+				fname = 100;
+			}
+			readData('sensor_data/sonar/sonarData.csv?'+ Math.random(), function (binStr2) {
+				//console.log("C: " + binStr);
+				X_sonic = Number(binStr2);
+				console.log("sonarData: " + X_sonic);
+				line2.append(new Date().getTime(), X_sonic); //ultrasonic
+
+			});
+			readData('sensor_data/temperature/tempData.csv?'+ Math.random(), function (binStr1) {
+				X_temp = Number(binStr1);
+				//console.log("tempData: " + X_temp);
+				line1.append(new Date().getTime(), X_temp); //temp
+
+			});
+			readData('sensor_data/gas/gasData.csv?'+ Math.random(), function (binStr3) {
+				X_gas = Number(binStr3);
+				//console.log("gasData: " + X_gas);
+				line3.append(new Date().getTime(), X_gas); //gas
+
+			});
+			readData('sensor_data/flame/flameData.csv?'+ Math.random(), function (binStr4) {
+				X_flame = Number(binStr4);
+				//console.log("flameData: " + X_flame);
+				line4.append(new Date().getTime(), X_flame); //flame
+
+			});
+			//X = Number(binStr);
+			//console.log("D: " + X);
+
+		}, 1000);
+		
+		//create the charts
+		//temp
+		var smoothie = new SmoothieChart({interpolation:'linear',grid:{fillStyle:'#ffffff',sharpLines:true,verticalSections:8},labels:{fillStyle:'#000000',fontSize:12},maxValue:35,minValue:20,timestampFormatter:SmoothieChart.timeFormatter});
+		//ultrasonic
+		var smoothie2 = new SmoothieChart({interpolation:'linear',grid:{fillStyle:'#ffffff',sharpLines:true,verticalSections:8},labels:{fillStyle:'#000000',fontSize:12},maxValue:120,minValue:0,timestampFormatter:SmoothieChart.timeFormatter});
+		//gas
+		var smoothie3 = new SmoothieChart({interpolation:'linear',grid:{fillStyle:'#ffffff',sharpLines:true,verticalSections:8},labels:{fillStyle:'#000000',fontSize:12},maxValue:255,minValue:0,timestampFormatter:SmoothieChart.timeFormatter});
+		//flame
+		var smoothie4 = new SmoothieChart({interpolation:'linear',grid:{fillStyle:'#ffffff',sharpLines:true,verticalSections:8},labels:{fillStyle:'#000000',fontSize:12},maxValue:255,minValue:0,timestampFormatter:SmoothieChart.timeFormatter});
+		
+		/*,horizontalLines:[{color:'#333333',lineWidth:1,value:0},{color:'#333333',lineWidth:1,value:63.75},{color:'#333333',lineWidth:1,value:191.25}]*/
+		smoothie.addTimeSeries(line1, {lineWidth:2,strokeStyle:'#000000'});
+		smoothie2.addTimeSeries(line2, {lineWidth:2,strokeStyle:'#000000'});
+		smoothie3.addTimeSeries(line3, {lineWidth:2,strokeStyle:'#000000'});
+		smoothie4.addTimeSeries(line4, {lineWidth:2,strokeStyle:'#000000'});
+		
+		smoothie.streamTo(document.getElementById("mycanvas"), 1000);
+		smoothie2.streamTo(document.getElementById("mycanvas2"), 1000);
+		smoothie3.streamTo(document.getElementById("mycanvas3"), 1000);
+		smoothie4.streamTo(document.getElementById("mycanvas4"), 1000);
+    </script>
+	<script>
+		setInterval(function loadImage() {
+			//var c = document.getElementById("fireImageCanvas");
+			//var ctx = c.getContext("2d");
+			var img = document.getElementById("fireImage");
+			img.src="images/webcam.jpg?" + Math.random();
+			//ctx.drawImage(img,10,10);
+		},1000);
+		
+		
+	</script>
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
